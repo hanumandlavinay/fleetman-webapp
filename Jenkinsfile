@@ -26,7 +26,7 @@ pipeline {
 
       stage('Deploy to Cluster') {
           steps {
-            sh 'envsubst < ${WORKSPACE}/deploy.yaml | kubectl apply -f /var/lib/jenkins/workspace/jenkins-cluster-admin-config -'
+            sh 'envsubst < /var/lib/jenkins/workspace/jenkins-cluster-admin-config | ${WORKSPACE}/deploy.yaml | kubectl apply -f -'
           }
       }
    }
