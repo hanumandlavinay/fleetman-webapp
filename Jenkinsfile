@@ -6,7 +6,6 @@ pipeline {
      SERVICE_NAME = "fleetman-webapp"
      ECR_URI = "738942673819.dkr.ecr.us-east-2.amazonaws.com/fleetman-webapp"
      REPOSITORY_TAG ="${ECR_URI}:${BUILD_ID}"
-     CONFIG = "/var/lib/jenkins/workspace/fleetman-webapp/jenkins-cluster-admin-config"
    }
 
    stages {
@@ -28,7 +27,7 @@ pipeline {
       stage('Deploy to Cluster') {
           steps {
            // sh '/var/lib/jenkins/workspace/fleetman-webapp/jenkins-cluster-admin-config'
-             sh 'envsubst < ${CONFIG} | ${WORKSPACE}/deploy.yaml | /usr/local/bin/kubectl apply -f -'
+             sh 'envsubst < ${WORKSPACE}/deploy.yaml | /usr/local/bin/kubectl apply -f -'
           
       }
    }
